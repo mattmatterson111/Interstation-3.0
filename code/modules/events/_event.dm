@@ -22,6 +22,8 @@
 	var/alertadmins = 1			//should we let the admins know this event is firing
 								//should be disabled on events that fire a lot
 
+	var/aspect = 0 				//Whether or not it's a one time aspect. If it is it won't be in rotation. See aspects.dm for more on aspects.
+
 	var/list/gamemode_blacklist = list() // Event won't happen in these gamemodes
 	var/list/gamemode_whitelist = list() // Event will happen ONLY in these gamemodes if not empty
 

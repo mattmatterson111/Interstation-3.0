@@ -56,6 +56,9 @@ var/datum/subsystem/ticker/ticker
 
 	var/news_report
 
+	var/aspect = null						//Used in aspect code. See aspects.dm
+	var/chosen_aspect = null
+
 /datum/subsystem/ticker/New()
 	NEW_SS_GLOBAL(ticker)
 
@@ -184,6 +187,7 @@ var/datum/subsystem/ticker/ticker
 		toggle_ooc(0) // Turn it off
 	round_start_time = world.time
 
+	choose_aspect()
 	start_landmarks_list = shuffle(start_landmarks_list) //Shuffle the order of spawn points so they dont always predictably spawn bottom-up and right-to-left
 	create_characters() //Create player characters and transfer them
 	collect_minds()
@@ -363,6 +367,18 @@ var/datum/subsystem/ticker/ticker
 			player.new_player_panel()
 
 
+//################ASPECTS!!################
+/datum/subsystem/ticker/proc/choose_aspect()//There has got to be a better way to do this than hardcoding.
+	var/aspect1 = pick(/datum/round_event/aspect/bad_hop/clown, /datum/round_event/aspect/gifted, /datum/round_event/aspect/clownstation, /datum/round_event/aspect/two_caps, /datum/round_event/aspect/eimplant)
+	var/aspect2 = pick(/datum/round_event/aspect/bad_hop, /datum/round_event/aspect/toolbox_salesman, /datum/round_event/aspect/identity_crisis, /datum/round_event/aspect/kungfu, /datum/round_event/aspect/quiet)
+	aspect = pick(aspect1, aspect2) //This has been done to reduce the number of things it cycles through at one time. Now it cycles through two, and then picks from those two.
+	if(aspect)
+		var/datum/round_event/aspect/A = new aspect()
+		world << "<FONT size=3 color='blue'><B>Hail Nanotrasen! [A.description]</B></FONT>"//Print it out.
+		chosen_aspect = "<FONT size=3 color='blue'><B>The aspect was: [A.name]. [A.description]</B></FONT>"//And this is the message that prints it out round end.
+//########################################
+
+
 /datum/subsystem/ticker/proc/collect_minds()
 	for(var/mob/living/player in player_list)
 		if(player.mind)
@@ -437,6 +453,7 @@ var/datum/subsystem/ticker/ticker
 		world << "<BR>[TAB]Survival Rate: <B>[num_survivors] ([PERCENT(num_survivors/total_players)]%)</B>"
 	world << "<BR>"
 
+	world << "[chosen_aspect]" //Print out chosen aspect's description and name.
 	CHECK_TICK
 
 	//Silicon laws report
