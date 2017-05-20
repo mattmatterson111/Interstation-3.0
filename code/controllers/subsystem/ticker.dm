@@ -370,7 +370,7 @@ var/datum/subsystem/ticker/ticker
 //################ASPECTS!!################
 /datum/subsystem/ticker/proc/choose_aspect()//There has got to be a better way to do this than hardcoding.
 	var/aspect1 = pick(/datum/round_event/aspect/bad_hop/clown, /datum/round_event/aspect/gifted, /datum/round_event/aspect/clownstation, /datum/round_event/aspect/two_caps, /datum/round_event/aspect/eimplant)
-	var/aspect2 = pick(/datum/round_event/aspect/bad_hop, /datum/round_event/aspect/toolbox_salesman, /datum/round_event/aspect/identity_crisis, /datum/round_event/aspect/kungfu, /datum/round_event/aspect/quiet)
+	var/aspect2 = pick(/datum/round_event/aspect/bad_hop, /datum/round_event/aspect/toolbox_salesman, /datum/round_event/aspect/identity_crisis, /datum/round_event/aspect/quiet)
 	aspect = pick(aspect1, aspect2) //This has been done to reduce the number of things it cycles through at one time. Now it cycles through two, and then picks from those two.
 	if(aspect)
 		var/datum/round_event/aspect/A = new aspect()
