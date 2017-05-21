@@ -12,6 +12,8 @@
 	var/list/obscured = check_obscured_slots()
 	var/skipface = (wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE))
 
+	var/wielded = 0 //Whether or not the person is holding a weilded weapon.
+
 	//uniform
 	if(w_uniform && !(slot_w_uniform in obscured))
 		//Ties
@@ -57,10 +59,14 @@
 	//Hands
 	for(var/obj/item/I in held_items)
 		if(!(I.flags & ABSTRACT))
+			if(istype(I,/obj/item/weapon))
+				var/obj/item/weapon/W = I
+				if(W.wielded)
+					wielded = 1
 			if(I.blood_DNA)
-				msg += "<span class='warning'>[t_He] [t_is] holding \icon[I] [I.gender==PLURAL?"some":"a"] blood-stained [I.name] in [t_his] [get_held_index_name(get_held_index_of_item(I))]!</span>\n"
+				msg += "<span class='warning'>[t_He] [t_is] holding \icon[I] [I.gender==PLURAL?"some":"a"] blood-stained [I.name] in [t_his] [wielded ? "hands" : get_held_index_name(get_held_index_of_item(I))]!</span>\n"
 			else
-				msg += "[t_He] [t_is] holding \icon[I] \a [I] in [t_his] [get_held_index_name(get_held_index_of_item(I))].\n"
+				msg += "[t_He] [t_is] holding \icon[I] \a [I] in [t_his] [wielded ? "hands" : get_held_index_name(get_held_index_of_item(I))].\n"
 
 	//gloves
 	if(gloves && !(slot_gloves in obscured))
