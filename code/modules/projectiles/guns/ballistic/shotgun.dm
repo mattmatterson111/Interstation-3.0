@@ -11,6 +11,9 @@
 	mag_type = /obj/item/ammo_box/magazine/internal/shot
 	casing_ejector = 0
 	var/recentpump = 0 // to prevent spammage
+	mag_load_sound = 'sound/effects/wep_magazines/insertShotgun.ogg'
+	wielded_icon = "shotgun1"
+	fire_sound = 'sound/weapons/shotgun.ogg'//There is no fucking reason that shotguns should have the same sounds as pistols, TG.
 	weapon_weight = WEAPON_MEDIUM
 
 /obj/item/weapon/gun/ballistic/shotgun/attackby(obj/item/A, mob/user, params)

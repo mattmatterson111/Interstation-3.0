@@ -7,6 +7,9 @@
 	burst_size = 3
 	fire_delay = 2
 	actions_types = list(/datum/action/item_action/toggle_firemode)
+	mag_load_sound = 'sound/effects/wep_magazines/smg_load.ogg'
+	mag_unload_sound = 'sound/effects/wep_magazines/smg_unload.ogg'
+	chamber_sound = 'sound/effects/wep_magazines/smg_chamber.ogg'
 
 /obj/item/weapon/gun/ballistic/automatic/proto
 	name = "\improper NanoTrasen Saber SMG"
@@ -234,6 +237,9 @@
 	can_suppress = 0
 	burst_size = 3
 	fire_delay = 1
+	mag_load_sound = 'sound/effects/wep_magazines/ar_load.ogg'
+	mag_unload_sound = 'sound/effects/wep_magazines/ar_unload.ogg'
+	chamber_sound = 'sound/effects/wep_magazines/ar_chamber.ogg'
 
 
 
@@ -253,6 +259,9 @@
 	fire_delay = 0
 	pin = /obj/item/device/firing_pin/implant/pindicate
 	actions_types = list()
+	mag_load_sound = 'sound/effects/wep_magazines/bulldog_load.ogg'
+	mag_unload_sound = 'sound/effects/wep_magazines/bulldog_unload.ogg'
+	chamber_sound = 'sound/effects/wep_magazines/bulldog_chamber.ogg'
 
 /obj/item/weapon/gun/ballistic/automatic/shotgun/bulldog/unrestricted
 	pin = /obj/item/device/firing_pin
@@ -286,12 +295,15 @@
 	origin_tech = "combat=6;engineering=3;syndicate=6"
 	mag_type = /obj/item/ammo_box/magazine/mm556x45
 	weapon_weight = WEAPON_HEAVY
-	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
+	fire_sound = 'sound/weapons/gunshot_smg.ogg'
 	var/cover_open = 0
 	can_suppress = 0
 	burst_size = 3
 	fire_delay = 1
 	pin = /obj/item/device/firing_pin/implant/pindicate
+	mag_load_sound = 'sound/effects/wep_magazines/lmg_load.ogg'
+	mag_unload_sound = 'sound/effects/wep_magazines/lmg_unload.ogg'
+	chamber_sound = 'sound/effects/wep_magazines/lmg_chamber.ogg'
 
 /obj/item/weapon/gun/ballistic/automatic/l6_saw/unrestricted
 	pin = /obj/item/device/firing_pin

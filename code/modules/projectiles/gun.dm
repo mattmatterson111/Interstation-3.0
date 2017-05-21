@@ -59,6 +59,8 @@
 	var/zoom_amt = 3 //Distance in TURFs to move the user's screen forward (the "zoom" effect)
 	var/datum/action/toggle_scope_zoom/azoom
 
+	var/safety = 0 //Whether or not the safety is on.
+
 
 /obj/item/weapon/gun/New()
 	..()
@@ -88,6 +90,10 @@
 		user << "It doesn't have a firing pin installed, and won't fire."
 	if(unique_reskin && !current_skin)
 		user << "<span class='notice'>Alt-click it to reskin it.</span>"
+	if(safety)
+		user << "<span class='notice'>The safety is on.</span>"
+	else
+		user << "<span class='notice'>The safety is off.</span>"
 
 //called after the gun has successfully fired its chambered ammo.
 /obj/item/weapon/gun/proc/process_chamber()
@@ -139,6 +145,11 @@
 		var/mob/living/L = user
 		if(!can_trigger_gun(L))
 			return
+
+	if(safety)
+		user << "<span class='userdanger'>The safety is on!</span>"
+		shoot_with_empty_chamber(user)
+		return
 
 	if(!can_shoot()) //Just because you can pull the trigger doesn't mean it can shoot.
 		shoot_with_empty_chamber(user)
@@ -359,6 +370,11 @@
 		return
 	if(unique_reskin && !current_skin && loc == user)
 		reskin_gun(user)
+
+	if(src == user.get_active_held_item())
+		safety = !safety
+		playsound(user, 'sound/weapons/selector.ogg', 100, 1)
+		user << "<span class='notice'>You toggle the safety [safety ? "on":"off"].</span>"
 
 
 /obj/item/weapon/gun/proc/reskin_gun(mob/M)
