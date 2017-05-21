@@ -262,15 +262,19 @@ var/list/map_transition_config = MAP_TRANSITION_CONFIG
 				C.Export("##action=load_rsc", round_end_sound)
 	else
 		round_end_sound = pick(\
+		'sound/roundend/endsound1.ogg',
+		'sound/roundend/endsound2.ogg',
+		'sound/roundend/endsound3.ogg',
+		'sound/roundend/endsound4.ogg'\
+		)/*
 		'sound/roundend/newroundsexy.ogg',
 		'sound/roundend/apcdestroyed.ogg',
 		'sound/roundend/bangindonk.ogg',
 		'sound/roundend/leavingtg.ogg',
 		'sound/roundend/its_only_game.ogg',
 		'sound/roundend/yeehaw.ogg',
-		'sound/roundend/disappointed.ogg'\
-		)
-
+		'sound/roundend/disappointed.ogg'
+		*/
 	for(var/thing in clients)
 		new /obj/screen/splash(thing, FALSE, FALSE)
 
