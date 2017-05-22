@@ -9,6 +9,7 @@
 	slot_flags = SLOT_BELT
 	materials = list(MAT_METAL=50, MAT_GLASS=20)
 	actions_types = list(/datum/action/item_action/toggle_light)
+	var/on_sound = 'sound/items/flashlight_on.ogg'
 	var/on = 0
 	var/brightness_on = 4 //luminosity when on
 
@@ -26,6 +27,7 @@
 
 /obj/item/device/flashlight/attack_self(mob/user)
 	on = !on
+	playsound(user, on_sound, 50, 1)
 	update_brightness(user)
 	for(var/X in actions)
 		var/datum/action/A = X
@@ -214,6 +216,7 @@
 	// All good, turn it on.
 	if(.)
 		user.visible_message("<span class='notice'>[user] lights \the [src].</span>", "<span class='notice'>You light \the [src]!</span>")
+		playsound(user, 'sound/items/flare.ogg', 50, 1)
 		force = on_damage
 		damtype = "fire"
 		START_PROCESSING(SSobj, src)
