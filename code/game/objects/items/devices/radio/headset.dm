@@ -31,8 +31,10 @@
 	if(ishuman(src.loc))
 		var/mob/living/carbon/human/H = src.loc
 		if(H.ears == src)
+			playsound(loc, 'sound/effects/radio_chatter.ogg', 25)//, 1)
 			return ..(freq, level)
 	else if(AIuser)
+		playsound(loc, 'sound/effects/radio_chatter.ogg', 25)//, 1)
 		return ..(freq, level)
 	return -1
 
