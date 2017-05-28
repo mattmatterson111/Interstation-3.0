@@ -67,6 +67,9 @@
 	if(user.get_inactive_held_item())
 		user << "<span class='warning'>You need your other hand to be empty!</span>"
 		return
+	if(user.get_num_arms() < 2)
+		user << "<span class='warning'>You don't have enough hands.</span>"
+		return
 	wielded = 1
 	if(force_wielded)
 		force = force_wielded
