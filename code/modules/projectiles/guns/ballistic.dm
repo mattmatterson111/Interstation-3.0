@@ -115,12 +115,7 @@
 /obj/item/weapon/gun/ballistic/attack_self(mob/living/user)
 	var/obj/item/ammo_casing/AC = chambered //Find chambered round
 	if(magazine)
-		magazine.loc = get_turf(src.loc)
-		user.put_in_hands(magazine)
-		magazine.update_icon()
-		magazine = null
-		user << "<span class='notice'>You pull the magazine out of \the [src].</span>"
-		playsound(loc, mag_unload_sound, 50)
+		unload_ammo(user)
 	else if(chambered)
 		AC.loc = get_turf(src)
 		AC.SpinAnimation(10, 1)
@@ -132,6 +127,22 @@
 	update_icon()
 	return
 
+/obj/item/weapon/gun/ballistic/proc/unload_ammo(mob/living/user)
+	if(magazine)
+		magazine.loc = get_turf(src.loc)
+		user.put_in_hands(magazine)
+		magazine.update_icon()
+		magazine = null
+		user << "<span class='notice'>You pull the magazine out of \the [src].</span>"
+		playsound(loc, mag_unload_sound, 50)
+	else
+		..()
+
+/obj/item/weapon/gun/ballistic/attack_hand(mob/living/user)
+	if(user.get_inactive_held_item() == src)
+		unload_ammo(user)
+	else
+		return ..()
 
 /obj/item/weapon/gun/ballistic/examine(mob/user)
 	..()

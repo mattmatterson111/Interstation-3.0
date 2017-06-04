@@ -72,7 +72,7 @@ var/datum/subsystem/events/SSevent
 
 	var/sum_of_weights = 0
 	for(var/datum/round_event_control/E in control)
-		if(E.aspect)							
+		if(E.aspect)	//So that aspects aren't in rotation.						
 			continue
 		if(!E.canSpawnEvent(players_amt, gamemode))
 			continue
